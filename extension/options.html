@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Extension Options</title></head>
+<body>
+
+Collection Server:
+<select id="server">
+    <option value="https://muse.inria.fr/nfytextension/uploads" selected="selected">Muse Server</option>
+    <!--<option value="Raspberry Pi">Raspberry Pi</option>-->
+    <option value="http://127.0.0.1:19282">Local</option>
+    <!--<option value="Other">OTHER</option>-->
+</select>
+<br/><br/>
+If other: <input type="text" name="othertext" id="othertext" value="Type in other server">
+<br/><br/>
+<div id="status"></div>
+<button id="save">Save</button>
+
+<script src="options.js"></script>
+</body>
+</html>

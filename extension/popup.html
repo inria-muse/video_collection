@@ -1,0 +1,38 @@
+<!doctype html>
+<html style="width: 375px">
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+        width: 150px;
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
+      span {
+          display: block;
+      }
+    </style>
+
+  </head>
+  <body style="width: 375px">
+    <h3>Inria NF/YT Video Stats Tracker</h3>
+    <span style="font-size: 11pt" id="popup_user_id">Your device id is: </span><br/>
+    <!--<span><a href="" id="record-trigger">Run a record session</a></span>-->
+    <!--<br>-->
+    <span style="font-size: 8pt"><a href="" id="stats-opener">Open Current Displayed Video Stats</a></span>
+    <!--<br>-->
+    <!--<span><a href="" id="storage-purger">Purge Storage</a></span>-->
+    <!--<br>-->
+    <!--<span><a href="" id="storage-download">Download local storage</a></span>-->
+  </body>
+
+  <script src="popup.js"></script>
+</html>
+

@@ -1,0 +1,66 @@
+{
+  "manifest_version": 2,
+  "name": "Inria NF/YT Stats Tracker with HAR Extractor",
+  "description": "Extension that extracts video statistics (playback status) from Netflix, youtube, twitch and amazon prime video",
+  "version": "1.1.5",
+  "author": "MUSE team Inria (Francesco Bronzino <francesco.bronzino@inria.fr>)",
+  "homepage_url" : "https://team.inria.fr/muse/",
+  "content_scripts" : [
+    {
+      "matches" : ["https://www.netflix.com/*"],
+      "js" : ["general/utils.js", "netflix/netflix_cs.js"],
+      "run_at" : "document_start"
+    },
+    {
+      "matches" : ["https://www.youtube.com/*"],
+      "js" : ["general/utils.js", "general/video_cs.js", "youtube/youtube_cs.js"],
+      "run_at" : "document_start"
+    },
+    {
+      "matches" : ["https://www.twitch.tv/*"],
+      "js" : ["general/utils.js", "general/video_cs.js", "twitch/twitch_cs.js"],
+      "run_at" : "document_start"
+    },
+    {
+      "matches" : ["https://www.primevideo.com/*",
+        "https://www.amazon.com/gp/video/*"],
+      "js" : ["general/utils.js", "general/video_cs.js", "amazon/amazon_cs.js"],
+      "run_at" : "document_start"
+    },
+    {
+      "matches" : ["https://play.hbonow.com/*"],
+      "js" : ["general/utils.js", "general/video_cs.js", "hbo/hbo_cs.js"],
+      "run_at" : "document_start"
+    },
+    {
+      "matches" : ["https://www.hulu.com/watch/*"],
+      "js" : ["general/utils.js", "general/video_cs.js", "hulu/hulu_cs.js"],
+      "run_at" : "document_start"
+    }],
+  "permissions": [
+    "activeTab",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "https://muse.inria.fr/nfytextension/uploads",
+    "http://127.0.0.1:19282/",
+    "<all_urls>",
+    "webRequest"
+  ],
+  "icons": { "16": "data/icon16.png",
+    "48": "data/icon48.png",
+    "128": "data/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "general/video_utils.js",
+      "netflix/netflix_utils.js",
+      "youtube/youtube_utils.js",
+      "index.js"
+    ]
+  },
+  "options_page": "options.html"
+}
