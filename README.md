@@ -18,14 +18,14 @@ text invisible, which allows us to parse the reported statistics without
 impacting the playback experience. This information is updated once per
 second, so we adjusted our collection period accordingly. Netflix reports a
 variety of statistics. We focused on the player and buffer state information;
-including whether the player is playing or not, buffer levels (\ie, length of
+including whether the player is playing or not, buffer levels (i.e., length of
 video present in the buffer), and the buffering resolution.
 * *YouTube: iframe API.* We used the YouTube iframe API
 to periodically extract player status information, including current video
 resolution, available playback buffer (in seconds) and current playing
 position. Additionally, we collect events reported by the <video>
 HTML5 tag, which exposes the times that the player starts or stops the video
-playback due to both user interaction (\eg, pressing pause) or due to lack of
+playback due to both user interaction (e.g., pressing pause) or due to lack of
 available content in the buffer.
 * *Twitch and Amazon: HTML 5 tag parsing.* As the two services
 expose no proprietary interface, we generalized the module developed for
@@ -49,3 +49,11 @@ To automate session generation, use the included python script available in the 
 
 
 Finally, to parse the generated data, use the [videoanalysis](https://github.com/inria-muse/videoanalysis) scripts.
+
+## Contacts
+
+For any question, please use the issues tracker or contact one of the authors of the paper:
+
+**Inferring Streaming Video Quality from Encrypted Traffic: Practical Models and Deployment Experience.**  
+F. Bronzino, P. Schmitt, S.Ayoubi, G. Martins, R. Teixeira, N. Feamster.  
+To appear in the Proceedings of the ACM on Measurement and Analysis of Computing Systems (POMACS) and at ACM Sigmetrics 2020, Boston, USA, June 8-12, 2020.
