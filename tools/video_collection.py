@@ -3,7 +3,7 @@ import os
 from expscontrol.cmd_exec import RemoteNode,RemoteCommand,Command
 from expscontrol.nstreamer import Streamer
 import argparse
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import threading
 import random
 import hashlib
@@ -151,7 +151,7 @@ class S(BaseHTTPRequestHandler):
     if self.path == '/close':
       self.send_response(200)
     else:
-      print "Received unkown get request", self.path
+      print ("Received unkown get request", self.path)
       self.send_response(404)
 
   def do_POST(self):
@@ -186,7 +186,7 @@ class POSTHTTPServer(HTTPServer):
     self.server_close()
 
   def create_dummy_request(self):
-    print "Creating dummy request:","http://127.0.0.1:"+str(server_port)+"/close"
+    print ("Creating dummy request:","http://127.0.0.1:"+str(server_port)+"/close")
     wget = Command()
     wget.setCmd("wget http://127.0.0.1:"+str(server_port)+"/close")
     wget.runSync()
@@ -220,7 +220,7 @@ def collect_video(folder, URL, length=30, netem=None, runTA=True, runServer=True
 
 
 def collect_all_videos(folder):
-  print runs
+  print (runs)
 
   server_address = ('', server_port)
   httpd = POSTHTTPServer(folder, server_address, S)
@@ -228,7 +228,7 @@ def collect_all_videos(folder):
   server_thread.start()
 
   for run in runs:
-    print 'Run experiment', run['expname']
+    print ('Run experiment', run['expname'])
     m = hashlib.md5()
     m.update(run['expname'])
     n = m.hexdigest()

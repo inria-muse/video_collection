@@ -106,7 +106,12 @@ function createEntry(stringEntry) {
     for (lineKey in lines) {
         if (lines[lineKey] === "" || lines[lineKey] === undefined) continue;
         var key = findkey(lines[lineKey]);
+        console.log(key)
+        if (key === "" || key === undefined) continue;
         keyval = lines[lineKey].split(key+": ");
+        if (keyval.length < 2) continue;
+        console.log(keyval)
+        console.log(lines[lineKey])
         newEntry[key] = keyval[1].trim();
 
         /***********************************************************************/
@@ -161,6 +166,7 @@ function parseNetflixEntry(movie, end_ts) {
     var lastSeen = new StatsEntry();
     console.log("Going to process " + movie.values.length + " entries.");
     for (entryKey in movie.values) {
+        console.log(movie.values[entryKey])
         if (movie.values[entryKey].val === "--") continue;
         newEntry = createEntry(movie.values[entryKey]);
         //obj.vals.push(newEntry); //if you want to push a longer entry
