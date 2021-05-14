@@ -209,12 +209,13 @@ function uploadRecorededSession(jsonString, movieIdString, service, start_time) 
     });
 }
 
-function uploadRequestsHistory(tabId) {
+function uploadRequestsHistory(tabId, movieIdString, service, start_time) {
     requests_history = requests_tabs_data[tabId];
     if (requests_history === undefined || requests_history === null) {
         console.error("No requests_history found: " + tabId);
         return;
     }
+    requests_tabs_data[tabId] = {}
     console.log("Uploading " + tabId);
     jsonString = JSON.stringify(requests_history, null, 2);
     chrome.storage.local.get({
@@ -231,7 +232,7 @@ function uploadRequestsHistory(tabId) {
 
         var xhr = new XMLHttpRequest();
 
-        var jsonFileName = "requests_history.json";
+        var jsonFileName = "requests_history_" + service + "_" + movieIdString + "_" + start_time + "_" + tabId +".json";
 
         try {
             xhr.open("POST", server + "/" + jsonFileName, true);
@@ -265,7 +266,7 @@ function finishedRecordingNetflix(movie_id, end_ts, tabId) {
     var jsonData = parseNetflixEntry(movie, end_ts);
 
     uploadRecorededSession(jsonData, movie_id, "n", movie.startTime);
-    uploadRequestsHistory(tabId)
+    uploadRequestsHistory(tabId, movie_id, "n", movie.startTime)
 }
 
 function finishedRecordingYoutube(movie_id, end_ts, tabId) {
@@ -280,7 +281,7 @@ function finishedRecordingYoutube(movie_id, end_ts, tabId) {
     var jsonData = parseYoutubeEntry(movie, end_ts);
 
     uploadRecorededSession(jsonData, movie_id, "y", movie.startTime);
-    uploadRequestsHistory(tabId);
+    uploadRequestsHistory(tabId, movie_id, "y", movie.startTime);
 }
 
 function finishedRecordingTwitch(movie_id, end_ts, tabId) {
@@ -295,7 +296,7 @@ function finishedRecordingTwitch(movie_id, end_ts, tabId) {
     var jsonData = parseVideoEntry(movie, end_ts);
 
     uploadRecorededSession(jsonData, movie_id, "t", movie.startTime);
-    uploadRequestsHistory(tabId);
+    uploadRequestsHistory(tabId, movie_id, "t", movie.startTime);
 }
 
 function finishedRecordingAmazon(movie_id, end_ts, tabId) {
@@ -310,7 +311,7 @@ function finishedRecordingAmazon(movie_id, end_ts, tabId) {
     var jsonData = parseVideoEntry(movie, end_ts);
 
     uploadRecorededSession(jsonData, movie_id, "a", movie.startTime);
-    uploadRequestsHistory(tabId);
+    uploadRequestsHistory(tabId, movie_id, "a", movie.startTime);
 }
 
 
@@ -326,7 +327,7 @@ function finishedRecordingHbo(movie_id, end_ts, tabId) {
     var jsonData = parseVideoEntry(movie, end_ts);
 
     uploadRecorededSession(jsonData, movie_id, "h", movie.startTime);
-    uploadRequestsHistory(tabId);
+    uploadRequestsHistory(tabId, movie_id, "h", movie.startTime);
 }
 
 function finishedRecordingHulu(movie_id, end_ts, tabId) {
@@ -341,7 +342,7 @@ function finishedRecordingHulu(movie_id, end_ts, tabId) {
     var jsonData = parseVideoEntry(movie, end_ts);
 
     uploadRecorededSession(jsonData, movie_id, "u", movie.startTime);
-    uploadRequestsHistory(tabId);
+    uploadRequestsHistory(tabId, movie_id, "h", movie.startTime);
 }
 
 chrome.runtime.onMessage.addListener(
